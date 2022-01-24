@@ -6,7 +6,7 @@
         :items="orders"
         sort-by="id"
         class="elevation-1"
-      >
+        >
         <template v-slot:top>
           <v-toolbar flat color="white">
             <v-toolbar-title>Orders</v-toolbar-title>
@@ -20,62 +20,63 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="headline">{{ formTitle }}</span>
+                  <span class="headline">{{ formTitle }}  </span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
                     <v-row>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.askingOrganization"
-                          label="Organization"
+                          v-model="editedItem.customerID"
+                          label="customerID"
                           required
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.deliveryLocation"
-                          label="Delivery Location"
-                          required
-                        ></v-text-field>
+                        <v-select
+                          :items="products"
+                          v-model="editedItem.productID"
+                          label="ProductID"
+                        ></v-select>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
-                        <v-menu
-                          ref="menu"
-                          v-model="menu"
-                          :close-on-content-click="false"
-                          :return-value.sync="editedItem.deliveryDate"
-                          transition="scale-transition"
-                          offset-y
-                          min-width="290px"
+                      <v-menu
+                        ref="menu"
+                        v-model="WhenEndedDate"
+                        :close-on-content-click="false"
+                        :return-value.sync="editedItem.pickupDate"
+                        transition="scale-transition"
+                        offset-y
+                        min-width="290px"
+                      >
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-text-field
+                            v-model="editedItem.expectedDeliveryDate"
+                            label="Delivery Date"
+                            prepend-icon="mdi-calendar"
+                            readonly
+                            v-bind="attrs"
+                            v-on="on"
+                          ></v-text-field>
+                        </template>
+                        <v-date-picker
+                          v-model="editedItem.expectedDeliveryDate"
+                          label="Pick Up Date"
+                          required
                         >
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                              v-model="editedItem.deliveryDate"
-                              prepend-icon="mdi-calendar"
-                              readonly
-                              v-bind="attrs"
-                              v-on="on"
-                            ></v-text-field>
-                          </template>
-                          <v-date-picker
-                            v-model="editedItem.deliveryDate"
-                            label="Delivery Location"
-                            required
+                          <v-spacer></v-spacer>
+                          <v-btn text color="primary" @click="menu = false">
+                            Cancel
+                          </v-btn>
+                          <v-btn
+                            text
+                            color="primary"
+                            @click="$refs.menu.save(WhenEndedDate)"
                           >
-                            <v-spacer></v-spacer>
-                            <v-btn text color="primary" @click="menu = false">
-                              Cancel
-                            </v-btn>
-                            <v-btn
-                              text
-                              color="primary"
-                              @click="$refs.menu.save(editedItem.deliveryDate)"
-                            >
-                              OK
-                            </v-btn>
-                          </v-date-picker>
-                        </v-menu>
+                            OK
+                          </v-btn>
+                        </v-date-picker>
+                      </v-menu>
                       </v-col>
                     </v-row>
                     <v-row>
@@ -86,23 +87,123 @@
                           required
                         ></v-text-field>
                       </v-col>
+
                       <v-col cols="12" sm="6" md="4">
-                        <v-slider
-                          label="Priority"
-                          v-model="editedItem.priority"
-                          max="5"
-                          min="1"
-                          thumb-label="always"
-                        ></v-slider>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-select
-                          :items="vaccineTypes"
-                          v-model="editedItem.type"
-                          label="Vaccine Type"
-                        ></v-select>
+                        <v-menu
+                          ref="menu"
+                          v-model="menu"
+                          :close-on-content-click="false"
+                          :return-value.sync="editedItem.pickupDate"
+                          transition="scale-transition"
+                          offset-y
+                          min-width="290px"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="editedItem.pickupDate"
+                              label="Pickup Date"
+                              prepend-icon="mdi-calendar"
+                              readonly
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                          <v-date-picker
+                            v-model="editedItem.pickupDate"
+                            label="Pick Up Date"
+                            required
+                          >
+                            <v-spacer></v-spacer>
+                            <v-btn text color="primary" @click="menu = false">
+                              Cancel
+                            </v-btn>
+                            <v-btn
+                              text
+                              color="primary"
+                              @click="$refs.menu.save(editedItem.pickupDate)"
+                            >
+                              OK
+                            </v-btn>
+                          </v-date-picker>
+                        </v-menu>
                       </v-col>
                     </v-row>
+                    <v-row>
+                    <pre><b> Pick up Address </b></pre>
+
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.pickupAddress.street"
+                          label="Address Line 1"
+                          required
+                        ></v-text-field>
+                        <v-text-field
+                          v-model="editedItem.pickupAddress.zipcode"
+                          label="ZipCode"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.pickupAddress.city"
+                          label="City"
+                          required
+                        ></v-text-field>
+                        <v-text-field
+                          v-model="editedItem.pickupAddress.country"
+                          label="Country"
+                          required
+                        ></v-text-field>
+                          </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.pickupAddress.state"
+                          label="State"
+                          required
+                        ></v-text-field>
+
+                      </v-col>
+                      </v-row>
+                      <v-row>
+                      <pre> <b>Delivery  Address </b></pre>
+
+                      </v-row>
+                      <v-row>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.destinationAddress.street"
+                            label="Address Line 1"
+                            required
+                          ></v-text-field>
+                          <v-text-field
+                            v-model="editedItem.destinationAddress.zipcode"
+                            label="ZipCode"
+                            required
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.destinationAddress.city"
+                            label="City"
+                            required
+                          ></v-text-field>
+                          <v-text-field
+                            v-model="editedItem.destinationAddress.country"
+                            label="Country"
+                            required
+                          ></v-text-field>
+                            </v-col>
+                          <v-col cols="12" sm="6" md="4">
+                          <v-text-field
+                            v-model="editedItem.destinationAddress.state"
+                            label="State"
+                            required
+                          ></v-text-field>
+
+                        </v-col>
+                        </v-row>
                   </v-container>
                 </v-card-text>
                 <v-card-actions>
@@ -129,42 +230,72 @@
 
 <script>
 import axios from "axios";
+//import moment from 'moment';
 
-let backendURL = "/api/v1/orders";
+
+let backendURL = "http://localhost:8080/api/v1/orders";
 
 export default {
   name: "Orders",
   data: () => ({
+    timer: "",
+    counter: 0,
     orders: [],
     vaccineTypes: ["COVID-19", "H1N1"],
+    products: ["P01", "P02", "P03"],
     editedIndex: -1,
     editedItem: {
-      askingOrganization: "",
-      deliveryDate: new Date().toISOString().substr(0, 10),
-      deliveryLocation: "",
-      priority: 2,
-      quantity: 150,
-      type: "COVID-19",
+      customerID: "",
+      expectedDeliveryDate: "",
+      pickupDate: "",
+      quantity: 10,
+      productID: "P01",
+      pickupAddress: {
+          street: "1 main street",
+          city: "Amsterdam",
+          country: "Neederland",
+          state: "AA",
+          zipcode: "92000"
+        },
+      destinationAddress: {
+        street: "12 main street",
+        city: "san francisco",
+        country: "USA",
+        state: "CA",
+        zipcode: "92001"
+      }
     },
     defaultItem: {
       id: -1,
-      askingOrganization: "",
-      deliveryDate: new Date().toISOString().substr(0, 10),
-      deliveryLocation: "",
-      priority: 2,
-      quantity: 150,
-      type: "COVID-19",
+      customerID: "New Customer",
+      expectedDeliveryDate:  "",
+      pickupDate:  "",
+      quantity: 0,
+      productID: "P01",
+      pickupAddress: {
+          street: "1 main street",
+          city: "Amsterdam",
+          country: "Neederland",
+          state: "AA",
+          zipcode: "92000"
+        },
+      destinationAddress: {
+        street: "12 main street",
+        city: "san francisco",
+        country: "USA",
+        state: "CA",
+        zipcode: "92001"
+      }
     },
     dialog: false,
     menu: false,
     headers: [
-      { text: "Organization", value: "askingOrganization", sortable: true },
-      { text: "Location", value: "deliveryLocation", sortable: true },
-      { text: "Target Date", value: "deliveryDate", sortable: true },
-      { text: "Priority", value: "priority", sortable: true },
-      { text: "Quantity", value: "quantity", sortable: true },
+      { text: "customerID", value: "customerID", sortable: true },
+      { text: "productID", value: "productID", sortable: true },
+      { text: "voyageID", value: "voyageID", sortable: true },
+      { text: "containerID", value: "containerID", sortable: true },
       { text: "Status", value: "status" },
-      { text: "Actions", value: "actions", sortable: false },
+
     ],
   }),
   computed: {
@@ -178,7 +309,16 @@ export default {
     },
   },
   created() {
-    this.initialize();
+    //this.initialize();
+    this.timer = setInterval(this.initialize(), 500);
+    console.log("intialized")
+
+  },
+  mounted() {
+    //this.initialize();
+    this.timer = setInterval(this.initialize(), 500);
+    console.log("intialized")
+
   },
   methods: {
     initialize() {
@@ -197,21 +337,31 @@ export default {
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
+
       });
+
     },
     save() {
+      if ( this.editedItem.productID == "P02" ){
+        this.editedItem.productID = "VOYAGE_FAILS"
+      }
+
+
       if (this.editedIndex > -1) {
         axios
           .put(backendURL + "/" + this.editedItem.id, this.editedItem)
           .then((resp) => (this.editedItem = resp.data));
         Object.assign(this.orders[this.editedIndex], this.editedItem);
       } else {
+
         axios
           .post(backendURL, this.editedItem)
           .then((resp) => (this.editedItem = resp.data));
         this.orders.push(this.editedItem);
       }
       this.close();
+
+
     },
   },
 };
