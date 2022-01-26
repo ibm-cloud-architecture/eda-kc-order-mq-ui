@@ -11,7 +11,7 @@
           width="40"
         />
       </div>
-      <v-toolbar-title>{{ title }} - {{ version }}</v-toolbar-title>
+      <v-toolbar-title>{{ title }} </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn to="/" text>
         <v-icon left>mdi-home</v-icon>
@@ -48,22 +48,29 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "App",
+
   data: () => {
-      
+
       return {
+        message: "",
         version: {},
         title: process.env.VUE_APP_TITLE
-      }   
+      }
   },
   created() {
     this.initialize();
   },
+  mounted(){
+  this.initialize();
+  },
   methods: {
     initialize() {
-      axios.get("/api/v1/orders/version").then((resp) => (this.version = resp.data));
-      console.log(this.version)
+      axios.get("http://localhost:8080/api/v1/orders").then((resp) => (this.version = resp.data));
+      console.log("Initilized in Vue")
+
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Welcome to the Saga with MQ pattern demonstration Latest!!!!</h3>
+    <h3>Welcome to the Saga with MQ pattern demonstration!!!!</h3>
     <div class="outer">
 
       <div class="inner">
