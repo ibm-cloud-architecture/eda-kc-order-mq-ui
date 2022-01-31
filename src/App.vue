@@ -21,9 +21,9 @@
         <v-icon left>mdi-store</v-icon>
         Orders
       </v-btn>
-      <v-btn to="/plans" text>
+      <v-btn to="/voyages" text>
         <v-icon left>mdi-hospital</v-icon>
-        Shipment Plans
+        Voyages
       </v-btn>
       <v-btn to="/transportation" text>
         <v-icon left>mdi-train</v-icon>
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     initialize() {
-      axios.get("http://localhost:8080/api/v1/orders").then((resp) => (this.version = resp.data));
+      axios.get("http://localhost:8081/api/v1/voyages").then((resp) => (this.version = resp.data));
       console.log("Initilized in Vue")
 
     }

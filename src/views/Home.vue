@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Welcome to the Saga with MQ pattern demonstration!!!!</h3>
+    <h3>Welcome to the Saga with MQ pattern design pattern demonstration!!!!</h3>
     <div class="outer">
 
       <div class="inner">
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     initialize() {
-      axios.get("http://localhost:8080/api/v1/orders").then((resp) => (this.version = resp.data));
+      axios.get("http://localhost:8081/api/v1/voyages").then((resp) => (this.version = resp.data));
 
     }
   }

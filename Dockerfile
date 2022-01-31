@@ -10,12 +10,17 @@ RUN npm install
 # Copy rest of the files
 COPY . .
 
+
 # Build the project
 RUN npm run build
 
 
 FROM nginx:alpine as production-build
-##COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf.template
+COPY docker-entrypoint.sh /
+
+ENV API_HOST_ORDERMS = "http://host.docker.internal"
+ENV API_PORT_ORDERMS = "8080"
 
 ## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
@@ -24,4 +29,5 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /vue-ui/dist /usr/share/nginx/html
 
 EXPOSE 80
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

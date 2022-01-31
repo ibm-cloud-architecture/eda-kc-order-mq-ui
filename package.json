@@ -9,12 +9,13 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
-    "dotenv": "",
     "core-js": "^3.6.5",
+    "dotenv": "",
+    "moment": "^2.22.2",
     "vue": "^2.6.11",
+    "vue-axios-cors": "^1.0.1",
     "vue-router": "^3.2.0",
-    "vuetify": "^2.2.11",
-    "moment": "^2.22.2"
+    "vuetify": "^2.2.11"
   },
   "devDependencies": {
     "@mdi/font": "^5.8.55",

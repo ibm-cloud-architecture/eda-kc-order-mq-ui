@@ -15,10 +15,11 @@
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="1200px">
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark class="mb-2" v-on="on"
+                <v-btn  color="primary" dark class="mb-2" v-on="on"
                   >New Order</v-btn>
 
               </template>
+
 
               <v-card>
                 <v-card-title>
@@ -233,8 +234,8 @@
 
 <script>
 import axios from "axios";
-//import moment from 'moment';
-let backendURL = "http://localhost:8080/api/v1/orders";
+
+let backendURL = "/api/v1/orders";
 export default {
   name: "Orders",
   data: () => ({
@@ -326,7 +327,7 @@ export default {
   },
   mounted() {
 
-    console.log("intialized moiunted")
+    console.log("intialize mounted")
   },
   methods: {
   testFunction: function () {
@@ -338,8 +339,7 @@ export default {
    },
 
     initialize(){
-      axios
-        .get(backendURL)
+      axios.get(backendURL)
         .then(resp => {
           this.orders = resp.data;
         })
@@ -375,6 +375,7 @@ export default {
       if ( this.editedItem.productID == "P02" ){
         this.editedItem.productID = "VOYAGE_FAILS"
       }
+
       if (this.editedIndex > -1) {
         axios
           .put(backendURL + "/" + this.editedItem.id, this.editedItem)

@@ -51,11 +51,10 @@ services:
     ports:
       - "8081:8081"
   web:
-     image: "quay.io/kbilquees/eda-kc-order-mq-ui-main_web"
-     stdin_open: true
-     tty: true
-     ports:
-          - "8089:80"
-     volumes:
-          - "/vue-ui/node_modules"
-          - ".:/vue-ui"
+  environment:
+    HOST_API_ORDERMS: http://localhost:8080  
+   image: "quay.io/kbilquees/eda-kc-order-mq-ui-main_web"
+   stdin_open: true
+   tty: true
+   ports:
+      - "8089:80"
