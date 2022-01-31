@@ -21,7 +21,7 @@
         <template #item.voyageID="{ item }">
         <v-dialog v-model="dialog" max-width="1200px">
           <template v-slot:activator="{ on }">
-          <v-btn @click="getVoyage(item.voyageID)" color="none" light  v-on="on"
+          <v-btn @click="getVoyage(item.voyageID)" color="light-blue darken-4" plain tile elevation=0  v-on="on"
            > {{item.voyageID}}</v-btn>
             </template>
               <v-card>
