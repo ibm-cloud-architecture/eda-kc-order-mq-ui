@@ -264,16 +264,16 @@ export default {
       productID: "P01",
       pickupAddress: {
           street: "1 main street",
-          city: "Amsterdam",
-          country: "Neederland",
-          state: "AA",
+          city: "SF",
+          country: "USA",
+          state: "CA",
           zipcode: "92000"
         },
       destinationAddress: {
         street: "12 main street",
-        city: "san francisco",
-        country: "USA",
-        state: "CA",
+        city: "Shangai",
+        country: "China",
+        state: "China",
         zipcode: "92001"
       }
     },
@@ -286,16 +286,16 @@ export default {
       productID: "P01",
       pickupAddress: {
           street: "1 main street",
-          city: "Amsterdam",
-          country: "Neederland",
-          state: "AA",
+          city: "SF",
+          country: "USA",
+          state: "CA",
           zipcode: "92000"
         },
       destinationAddress: {
         street: "12 main street",
-        city: "san francisco",
-        country: "USA",
-        state: "CA",
+        city: "Shangai",
+        country: "China",
+        state: "China",
         zipcode: "92001"
       }
     },
@@ -373,7 +373,7 @@ export default {
     },
     save() {
       if ( this.editedItem.productID == "P02" ){
-        this.editedItem.productID = "VOYAGE_FAILS"
+        this.editedItem.productID = "REFEER_FAILS"
       }
 
       if (this.editedIndex > -1) {

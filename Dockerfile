@@ -17,7 +17,7 @@ COPY editNginx.sh /docker-entrypoint.d/
 
  ENV API_HOST_ORDERMS=http://host.docker.internal
  ENV API_PORT_ORDERMS=8080
- ENV API_HOST_VOYAGESMS=http://localhost
+ ENV API_HOST_VOYAGESMS=http://host.docker.internal
  ENV API_PORT_VOYAGESMS=8081
 
 ## Remove default nginx index page

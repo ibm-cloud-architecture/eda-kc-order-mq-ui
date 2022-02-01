@@ -6,18 +6,19 @@
       <div class="inner">
       <h4 style="line-height: 50px;">Demonstration script</h4>
       <p>
-        This application is for demonstration purpose, and used to create orders
-        as a government agency may do to get vaccine lots.
+        The [Saga pattern](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/saga/) helps to support a long running
+        transaction that can be broken up to a collection of sub transactions that can be interleaved any way with other transactions.
+        The SAGA orchestration is done by the order service that sends commands to drive each SAGA participant on what to do and when.
+        To support strong consistency and exactly once delivery we are using Queues.<br>
+        The Saga will be started by adding a new order, or updating major characteristics of an existing order.
+        The demonstration illustrates the happy path, where each participants respond positively, and one incomplete path, where the order
+        will not be satisfied because of lack of refrigerator containers. So the compensation logic will roll back the Vessel assignment.
+
       </p>
-      <ul>
-        <li>
-          Go to the orders menu to see the list of current orders
-        </li>
-      </ul>
+
       </div>
       <div>
-      <p>This vaccine order micro-service is represented as the purple component in the figure below. See explanations at <a href="https://ibm-cloud-architecture.github.io/vaccine-solution-main/solution/orderms/">this article</a></p>
-      <v-img
+        <v-img
           alt="IBM Cloud Logo"
           class="shrink mr-2"
           contain
@@ -43,7 +44,7 @@
 </style>
 
 <script>
-import axios from "axios";
+//import axios from "axios";
 
 export default {
   name: "Home",
