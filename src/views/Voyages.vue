@@ -57,7 +57,7 @@
 <script>
 import axios from "axios";
 
-let backendURL = "http://localhost:8081/api/v1/voyages";
+let backendURL = "/api/v1/voyages";
 export default {
   name: "Voyages",
   data: () => ({
@@ -103,7 +103,7 @@ export default {
         console.log("calling initialize in voyages")
       },
       getVoyage(voyageid){
-        axios.get("http://localhost:8081/api/v1/voyages/history?voyageId="+voyageid)
+        axios.get(backendURL+"/history?voyageId="+voyageid)
           .then(resp => {
             this.voyageitems = resp.data;
             console.log(this.voyageitems)

@@ -58,7 +58,8 @@ export default {
   },
   methods: {
     initialize() {
-      axios.get("http://localhost:8081/api/v1/voyages").then((resp) => (this.version = resp.data));
+    //  axios.get("http://localhost:8081/api/v1/voyages").then((resp) => (this.version = resp.data));
+    console.log("none")
 
     }
   }
