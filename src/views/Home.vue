@@ -6,7 +6,7 @@
       <div class="inner">
       <h4 style="line-height: 50px;">Demonstration script</h4>
       <p>
-        The [Saga pattern](https://ibm-cloud-architecture.github.io/refarch-eda/patterns/saga/) helps to support a long running
+        The  <b> <a target="_blank" href="https://ibm-cloud-architecture.github.io/refarch-eda/patterns/saga/">[Saga pattern]</a> </b> helps to support a long running
         transaction that can be broken up to a collection of sub transactions that can be interleaved any way with other transactions.
         The SAGA orchestration is done by the order service that sends commands to drive each SAGA participant on what to do and when.
         To support strong consistency and exactly once delivery we are using Queues.<br>

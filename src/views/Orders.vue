@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-row>
-    <v-col sm="8" offset-sm="2">
+    <v-col sm="" offset-sm="2">
       <v-data-table
         :headers="headers"
         :items="orders"
@@ -271,7 +271,7 @@ export default {
         },
       destinationAddress: {
         street: "12 main street",
-        city: "Shangai",
+        city: "Shanghai",
         country: "China",
         state: "China",
         zipcode: "92001"
@@ -293,7 +293,7 @@ export default {
         },
       destinationAddress: {
         street: "12 main street",
-        city: "Shangai",
+        city: "Shanghai",
         country: "China",
         state: "China",
         zipcode: "92001"
@@ -303,6 +303,7 @@ export default {
     menu: false,
     menu2: false,
     headers: [
+      { text: "orderID", value: "orderID", sortable: true },
       { text: "customerID", value: "customerID", sortable: true },
       { text: "productID", value: "productID", sortable: true },
       { text: "voyageID", value: "voyageID", sortable: true },
