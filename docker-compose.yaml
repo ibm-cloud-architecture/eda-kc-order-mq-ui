@@ -82,10 +82,10 @@ services:
       - "8081:8081"
   web:
    environment:
-    API_HOST_ORDERMS=http://host.docker.internal
-    API_PORT_ORDERMS=8080
-    API_HOST_VOYAGESMS=http://host.docker.internal
-    API_PORT_VOYAGESMS=8081
+    API_HOST_ORDERMS: http://host.docker.internal
+    API_PORT_ORDERMS: 8080
+    API_HOST_VOYAGESMS: http://host.docker.internal
+    API_PORT_VOYAGESMS: 8081
    image: "quay.io/kbilquees/eda-kc-order-mq-ui-main_web"
    stdin_open: true
    tty: true
