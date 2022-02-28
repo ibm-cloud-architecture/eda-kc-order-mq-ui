@@ -15,44 +15,52 @@ services:
     stdin_open: true
     tty: true
   orderms:
+    hostname: orderms
     environment:
       FREEZER_REQUEST_QUEUE: DEV.FREEZER_REQUESTS
       FREEZER_RESPONSE_QUEUE: DEV.FREEZER_RESPONSES
       MQ_URL: "failover:(amqp://host.docker.internal:5672?jms.prefetchPolicy.queuePrefetch=1)"
       VOYAGE_REQUEST_QUEUE: DEV.VOYAGE_REQUEST
       VOYAGE_RESPONSE_QUEUE: DEV.VOYAGE_RESPONSE
-    image: "quay.io/ibmcase/eda-kc-order-cmd-mq:1.0-distroless"
+    image: "quay.io/ibmcase/eda-kc-order-ms-mq"
     depends_on:
       - "ibmmq"
     ports:
       - "8080:8080"
   reeferms:
+    hostname: reeferms
     environment:
       FREEZER_REQUEST_QUEUE: DEV.FREEZER_REQUESTS
       FREEZER_RESPONSE_QUEUE: DEV.FREEZER_RESPONSES
       MQ_URL: "failover:(amqp://host.docker.internal:5672?jms.prefetchPolicy.queuePrefetch=1)"
       VOYAGE_REQUEST_QUEUE: DEV.VOYAGE_REQUEST
       VOYAGE_RESPONSE_QUEUE: DEV.VOYAGE_RESPONSE
-    image: "quay.io/ibmcase/eda-kc-reefer-mq:1.0-distroless"
+    image: "quay.io/ibmcase/eda-kc-reefer-ms-mq"
     depends_on:
       - "ibmmq"
     ports:
       - "8083:8083"
   voyagems:
+    hostname: voyagems
     environment:
       FREEZER_REQUEST_QUEUE: DEV.FREEZER_REQUESTS
       FREEZER_RESPONSE_QUEUE: DEV.FREEZER_RESPONSES
       MQ_URL: "failover:(amqp://host.docker.internal:5672?jms.prefetchPolicy.queuePrefetch=1)"
       VOYAGE_REQUEST_QUEUE: DEV.VOYAGE_REQUEST
       VOYAGE_RESPONSE_QUEUE: DEV.VOYAGE_RESPONSE
-    image: "quay.io/ibmcase/eda-kc-voyage-ms-mq:1.2-distroless"
+    image: "quay.io/ibmcase/eda-kc-voyage-ms-mq"
     depends_on:
       - "ibmmq"
     ports:
       - "8081:8081"
   web:
-   image: "quay.io/kbilquees/eda-kc-order-mq-ui-main_web"
+   image: "quay.io/ibmcase/eda-kc-order-mq-ui"
    stdin_open: true
    tty: true
+   environment:
+     API_HOST_ORDERMS: http://orderms
+     API_PORT_ORDERMS: 8080
+     API_HOST_VOYAGESMS: http://voyagems
+     API_PORT_VOYAGESMS: 8081
    ports:
       - "8089:8080"

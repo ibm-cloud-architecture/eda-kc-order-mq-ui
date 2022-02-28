@@ -22,7 +22,7 @@
           alt="IBM Cloud Logo"
           class="shrink mr-2"
           contain
-          src="../assets/vaccine-order-1.png"
+          src="../assets/saga-orchestrate.png"
           transition="scale-transition"
           width="900px"
         />

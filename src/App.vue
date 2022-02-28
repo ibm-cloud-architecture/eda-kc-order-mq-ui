@@ -25,10 +25,6 @@
         <v-icon left>mdi-hospital</v-icon>
         Voyages
       </v-btn>
-      <v-btn to="/transportation" text>
-        <v-icon left>mdi-train</v-icon>
-        transportation
-      </v-btn>
       <v-btn
         href="https://github.com/ibm-cloud-architecture/vaccine-order-mgr-pg"
         target="_blank"
